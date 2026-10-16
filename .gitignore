@@ -1,0 +1,9 @@
+node_modules
+dist
+storybook-static
+*.log
+.DS_Store
+*.tsbuildinfo
+.env
+.env.*
+!.env.example

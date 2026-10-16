@@ -1,0 +1,53 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+
+<Meta title="Foundations/Introduction" />
+
+# Honey DS
+
+**honey-ds** is Hiver's React component library. It is built on [shadcn/ui](https://ui.shadcn.com)
+and Tailwind CSS v4, and every colour, radius and spacing value comes from the
+**Honey DS - 2026** Figma variables.
+
+## How the Figma variables map to code
+
+| Figma collection | Modes | Where it lands |
+| --- | --- | --- |
+| Primitives | HIG, HOT | `--hds-color-*`, `--hds-scale-*`, `--hds-font-*` |
+| Numeric | Default | `--hds-spacing-*`, `--hds-radius-*`, `--hds-border-width-*`, `--hds-opacity-*` |
+| Semantic | Light, Dark, Hot - Light, Hot - Dark | `--hds-text-*`, `--hds-background-*`, `--hds-foreground-*`, `--hds-border-*`, `--hds-charts-*`, `--hds-effect-*` |
+| Components | HIG, Omni | `--hds-button-*`, `--hds-link-*`, `--hds-focus-*` |
+
+The shadcn variables (`--primary`, `--background`, `--border`, …) are aliases of those semantic tokens,
+so every shadcn component picks up the Honey palette, and switches theme and mode automatically.
+
+## Switching theme and mode
+
+Use the **Theme** and **Mode** toolbar buttons above to preview any story in all four combinations.
+In an app, set the same attributes on `<html>`:
+
+```html
+<html data-theme="omni" class="dark">
+```
+
+- `data-theme="omni"` selects the Hiver Omni brand (yellow primary, neutral greys, Hanken Grotesk). Omit it for the default HIG theme.
+- `class="dark"` (or `data-mode="dark"`) selects the dark colour scheme.
+
+## Using the library
+
+```bash
+npm install honey-ds
+```
+
+```tsx
+import 'honey-ds/styles.css'
+import { Button, Input, Dialog } from 'honey-ds'
+```
+
+Tailwind utilities for the tokens are also available in consuming apps that use Tailwind v4,
+for example `bg-hds-background-royal-subtle`, `text-hds-text-error-default`, `rounded-hds-8`, `p-hds-4`.
+
+## Updating tokens from Figma
+
+1. In Figma, open **Variables** in Dev Mode and click **Export** for each collection.
+2. Unzip into `tokens/figma/<collection>/` (file names are the mode names).
+3. Run `npm run tokens` to regenerate `src/styles/tokens.css` and `src/tokens/generated.ts`.
